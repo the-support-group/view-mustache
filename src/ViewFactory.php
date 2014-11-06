@@ -15,11 +15,20 @@ class ViewFactory extends BaseViewFactory
 
 
     /**
+     * @param string|null $cacheDir A directory to cache rendered templates into (enables caching).
+     */
+    public function __construct($cacheDir = null)
+    {
+        $this->cacheDir = $cacheDir;
+    }
+
+
+    /**
      * @param string $fileName The name of the file to load.
      * @return ViewInterface A view.
      */
     public function get($fileName)
     {
-        return new View(new Renderer, $this->find($fileName));
+        return new View(new Renderer($this->cacheDir), $this->find($fileName));
     }
 }
