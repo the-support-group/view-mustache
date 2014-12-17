@@ -29,7 +29,7 @@ class ViewFactory extends BaseViewFactory
      */
     public function get($fileName)
     {
-        new View(new Renderer($this->cacheDir), $this->find($fileName));
+        return new View(new Renderer($this->cacheDir), $this->find($fileName));
     }
 
 
