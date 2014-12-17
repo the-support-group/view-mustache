@@ -29,6 +29,19 @@ class ViewFactory extends BaseViewFactory
      */
     public function get($fileName)
     {
-        return new View(new Renderer($this->cacheDir), $this->find($fileName));
+        new View(new Renderer($this->cacheDir), $this->find($fileName));
+    }
+
+
+    /**
+     * Return a mustache raw template.
+     *
+     * @param string $fileName The name of the file to load.
+     * @return string The unrendered template (raw).
+     * @throws \Exception
+     */
+    public function getUnrendered($fileName)
+    {
+        return file_get_contents($this->find($fileName));
     }
 }
