@@ -6,8 +6,8 @@
     "require": {
         "php": ">=5.5.0",
         "phpunit/phpunit": "4.1.*",
-		"air-php/view": "dev-master",
-		"mustache/mustache": "2.*"
+	"air-php/view": "~0.1",
+	"mustache/mustache": "2.*"
     },
     "autoload": {
         "psr-4": {
