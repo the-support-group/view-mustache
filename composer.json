@@ -1,6 +1,5 @@
 {
     "name": "air-php/view-mustache",
-    "version": "0.2",
     "type": "library",
     "description": "A mustache implementation of an Air view renderer.",
     "require": {
