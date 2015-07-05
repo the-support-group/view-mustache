@@ -32,7 +32,9 @@ class Renderer extends BaseRenderer
                 'partials_loader' => new Mustache_Loader_FilesystemLoader($this->partialsDir)
             ]);
         } else {
-            $mustache = new Mustache_Engine();
+            $mustache = new Mustache_Engine([
+                'partials_loader' => new Mustache_Loader_FilesystemLoader($this->partialsDir)
+            ]);
         }
 
         return $mustache->render(file_get_contents($file), $data);
