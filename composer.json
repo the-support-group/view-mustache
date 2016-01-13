@@ -6,12 +6,19 @@
     "require": {
         "php": ">=5.5.0",
         "phpunit/phpunit": "4.1.*",
-		"air-php/view": "dev-master",
-		"mustache/mustache": "2.*"
+	"air-php/view": "dev-master",
+	"mustache/mustache": "2.*"
     },
     "autoload": {
         "psr-4": {
             "Air\\View\\Mustache\\": "src/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/the-support-group/view"
+        }
+
+    ]
 }
