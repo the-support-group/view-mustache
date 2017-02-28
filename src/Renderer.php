@@ -3,16 +3,19 @@
 namespace Air\View\Mustache;
 
 use Air\View\Renderer as BaseRenderer;
+use Mustache_Loader_FilesystemLoader;
 use Mustache_Engine;
 
 class Renderer extends BaseRenderer
 {
     /**
      * @param string|null $cacheDir A directory to cache rendered templates into (enables caching).
+     * @param string|null $partialsDir A directory where static partials are stored.
      */
-    public function __construct($cacheDir = null)
+    public function __construct($cacheDir = null, $partialsDir = null)
     {
         $this->cacheDir = $cacheDir;
+        $this->partialsDir = $partialsDir;
     }
 
 
@@ -25,10 +28,13 @@ class Renderer extends BaseRenderer
     {
         if (!is_null($this->cacheDir)) {
             $mustache = new Mustache_Engine([
-                'cache' => $this->cacheDir
+                'cache' => $this->cacheDir,
+                'partials_loader' => new Mustache_Loader_FilesystemLoader($this->partialsDir)
             ]);
         } else {
-            $mustache = new Mustache_Engine();
+            $mustache = new Mustache_Engine([
+                'partials_loader' => new Mustache_Loader_FilesystemLoader($this->partialsDir)
+            ]);
         }
 
         return $mustache->render(file_get_contents($file), $data);
