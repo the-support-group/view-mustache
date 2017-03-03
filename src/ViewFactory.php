@@ -15,13 +15,21 @@ class ViewFactory extends BaseViewFactory
 
 
     /**
+     * @var array $viewBaseData The data to set in the view when getting it.
+     */
+    private $viewBaseTags;
+
+
+    /**
      * @param string|null $cacheDir A directory to cache rendered templates into (enables caching).
      * @param string|null $partialsDir A directory where static partials are stored.
+     * @param array $viewBaseTags The base data for the view.
      */
-    public function __construct($cacheDir = null, $partialsDir = null)
+    public function __construct($cacheDir = null, $partialsDir = null, array $viewBaseTags = [])
     {
         $this->cacheDir = $cacheDir;
         $this->partialsDir = $partialsDir;
+        $this->viewBaseTags = $viewBaseTags;
     }
 
 
@@ -31,7 +39,13 @@ class ViewFactory extends BaseViewFactory
      */
     public function get($fileName)
     {
-        return new View(new Renderer($this->cacheDir, $this->partialsDir), $this->find($fileName));
+        $view = new View(new Renderer($this->cacheDir, $this->partialsDir), $this->find($fileName));
+
+        foreach ($this->viewBaseTags as $tag => $value) {
+            $view->$tag = $value;
+        }
+
+        return $view;
     }
 
 
